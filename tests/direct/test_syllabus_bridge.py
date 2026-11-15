@@ -20,6 +20,7 @@ URL_B = (
 HASH_A = hashlib.sha256(COURSE_A.encode("utf-8")).hexdigest()
 HASH_B = hashlib.sha256(COURSE_B.encode("utf-8")).hexdigest()
 PAIR_ID = "test-course-pair"
+SDK_VERSION = "v0.2.16"
 
 
 def register_example(contract, pair_id=PAIR_ID):
@@ -35,7 +36,10 @@ def register_example(contract, pair_id=PAIR_ID):
 
 
 def test_register_pair_and_read_open_state(direct_deploy):
-    contract = direct_deploy("contracts/syllabus_bridge.py")
+    contract = direct_deploy(
+        "contracts/syllabus_bridge.py",
+        sdk_version=SDK_VERSION,
+    )
 
     result = register_example(contract)
 
@@ -52,7 +56,10 @@ def test_register_pair_and_read_open_state(direct_deploy):
 
 
 def test_duplicate_pair_id_is_rejected(direct_deploy):
-    contract = direct_deploy("contracts/syllabus_bridge.py")
+    contract = direct_deploy(
+        "contracts/syllabus_bridge.py",
+        sdk_version=SDK_VERSION,
+    )
     register_example(contract)
 
     with pytest.raises(Exception, match="pair_id already exists"):
@@ -60,7 +67,10 @@ def test_duplicate_pair_id_is_rejected(direct_deploy):
 
 
 def test_invalid_url_is_rejected_without_registration(direct_deploy):
-    contract = direct_deploy("contracts/syllabus_bridge.py")
+    contract = direct_deploy(
+        "contracts/syllabus_bridge.py",
+        sdk_version=SDK_VERSION,
+    )
 
     with pytest.raises(Exception, match="HTTPS"):
         contract.register_pair(
@@ -78,7 +88,10 @@ def test_invalid_url_is_rejected_without_registration(direct_deploy):
 
 
 def test_invalid_hash_is_rejected_without_registration(direct_deploy):
-    contract = direct_deploy("contracts/syllabus_bridge.py")
+    contract = direct_deploy(
+        "contracts/syllabus_bridge.py",
+        sdk_version=SDK_VERSION,
+    )
 
     with pytest.raises(Exception, match="64 hexadecimal"):
         contract.register_pair(
@@ -96,7 +109,10 @@ def test_invalid_hash_is_rejected_without_registration(direct_deploy):
 
 
 def test_assessment_uses_consensus_and_stores_result(direct_vm, direct_deploy):
-    contract = direct_deploy("contracts/syllabus_bridge.py")
+    contract = direct_deploy(
+        "contracts/syllabus_bridge.py",
+        sdk_version=SDK_VERSION,
+    )
     register_example(contract)
 
     direct_vm.mock_web(
@@ -149,6 +165,7 @@ def test_assessment_uses_consensus_and_stores_result(direct_vm, direct_deploy):
             "course_b_quote": "Credits: 5 ECTS",
         },
     }
+
     direct_vm.mock_llm(
         r".*",
         json.dumps({"dimensions": dimensions}),
