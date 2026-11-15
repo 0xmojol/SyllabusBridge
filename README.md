@@ -46,6 +46,17 @@ The repository includes two fixed text fixtures used for the Studio test:
 
 The contract was tested with the registered pair `syllabus-test-001`. The result was `POTENTIAL_MATCH`; the credit dimension was `DIFFERENT` because the sample courses list 6 ECTS and 5 ECTS.
 
+## Automated tests
+
+The direct test suite covers pair registration and retrieval, duplicate ID rejection, invalid URL and hash rejection, and consensus assessment with result persistence.
+
+Run locally with:
+
+    python -m pip install -r requirements.txt
+    pytest tests/direct/ -v
+
+GitHub Actions runs the direct test suite automatically on pushes and pull requests targeting `main`. These direct-mode tests use mocked web and LLM responses; they complement, but do not replace, the successful GenLayer Studio end-to-end test documented below.
+
 ## GenLayer Studio deployment
 
 - Contract: `SyllabusBridge`
