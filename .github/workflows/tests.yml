@@ -9,6 +9,8 @@ on:
 jobs:
   direct-tests:
     runs-on: ubuntu-latest
+    env:
+      GLTEST_GENVM_VERSION: v0.2.16
 
     steps:
       - name: Get repository
