@@ -1,0 +1,5 @@
+Introduction to Data Science
+Credits: 6 ECTS
+Level: Undergraduate, intermediate
+Learning outcomes: Students will clean datasets, apply descriptive statistics, and communicate findings using visualizations.
+Topics: Data collection, data cleaning, exploratory analysis, probability, and data visualization.
