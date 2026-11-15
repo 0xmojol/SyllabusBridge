@@ -1,0 +1,5 @@
+Applied Data Analytics
+Credits: 5 ECTS
+Level: Undergraduate, intermediate
+Learning outcomes: Students will prepare datasets, perform statistical analysis, and present results through charts and reports.
+Topics: Data preparation, exploratory analysis, applied statistics, and visualization of data.
